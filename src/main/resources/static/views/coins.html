@@ -1,0 +1,65 @@
+<div class="section">
+    <h3>Coins</h3>
+    <div>
+    	<button ng-click="updatePrices()">Update prices</button>
+    	<table>
+    		<tr>
+    			<th>Coin</th><th>Balance</th><th>Save</th><th>Delete</th><th>Low 24hr</th><th>Price</th><th>High 24hr</th><th>Percent 24h</th><th>Value</th><th>Size</th>
+    		</tr>
+    		<tr ng-repeat="coin in coins | orderBy:'coin.name'">
+    			<td>{{coin.name}}</td>
+    			<td><input ng-model="coin.balance"></input></td>
+    			<td><button ng-click="updateCoin(coin)">Update</button></td>
+    			<td><button ng-click="deleteCoin(coin)">Delete</button></td>
+    			<td>{{coin.low24hr}}</td>
+    			<td><b>{{coin.price}}</b></td>
+    			<td>{{coin.high24hr}}</td>
+    			<td>{{coin.percent24hr}}%</td>
+    			<td><b>${{coin.value}}</b></td>
+    			<td>{{ "x".repeat(coin.size) }}</td>
+    		</tr>
+    		<tr>
+    			<td><input ng-model="newCoin.name"></input></td>
+    			<td><input ng-model="newCoin.balance"></input></td>
+    			<td><button ng-click="createCoin(newCoin)">Create</button></td>
+    			<td>-</td>
+    			<td>-</td>
+    			<td>-</td>
+    			<td>-</td>
+    		</tr>
+    		<tr>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td>Total:</td>
+    			<td><b>${{total}}</b></td>
+    			<td></td>
+    		</tr>
+    	</table>
+    </div>
+
+    <div>
+    	Start: <input ng-model="start"></input>
+    	End: <input ng-model="end"></input>
+    	Days: <input ng-model="days" ng-change="daysChange()"></input>
+    	Period: <input ng-model="period"></input>
+    	<button ng-click="timeAnalysis()">Time analysis</button>
+    	
+    	<table>
+    		<tr>
+    			<th>Pair</th><th>Min</th><th>Price</th><th>Max</th><th>%</th>
+    		</tr>
+	    	<tr ng-repeat="(pair,value) in matrix | orderBy:'pair'">
+	    			<td>{{pair}}</td>
+	    			<td>{{value.lowMin}}</td>
+	    			<td><b>{{value.price}}</b></td>
+	    			<td>{{value.highMax}}</td>
+	    			<td>{{value.percent}}</td>
+    		</tr>
+    	</table>
+    </div>
+</div>
